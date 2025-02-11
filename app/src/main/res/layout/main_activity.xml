@@ -1,107 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.a1.ThirdActivity"
-    tools:ignore="MissingClass">
+    android:orientation="vertical">
 
-    <!--    layout_constraintBottom_toBottomOf=parent-->
-    <!--    layout_constraintLeft_toLeftOf=parent-->
-    <!--    layout_constraintRight_toRightOf=parent-->
-    <!--    layout_constraintTop_toTopOf=parent-->
-    <TextView
-        android:id="@+id/textView"
-        style="@style/MyTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Trip #1 -->
+    <LinearLayout android:id="@+id/trip_1"
+        style="@style/TripBanner"
+        android:layout_marginTop="60dp">
+        <!-- Image of trip e.g. Eiffel tower -->
+        <ImageView android:id="@+id/trip_1_image"
+            style="@style/TripPhoto"
+            android:src="@drawable/italy" />
 
-    <!--    layout_constraintBottom_toBottomOf=parent-->
-    <!--    layout_constraintEnd_toEndOf=parent-->
-    <!--    layout_constraintStart_toStartOf=parent-->
-    <!--    layout_constraintTop_toTopOf=parent-->
-    <!--    layout_constraintVertical_bias=0.184-->
-    <SeekBar
-        android:id="@+id/seekBar"
-        android:layout_width="126dp"
-        android:layout_height="46dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:max="50"
-        android:progress="20"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.2" />
+        <!-- Trip info -->
+        <LinearLayout android:id="@+id/trip_1_info"
+            style="@style/TripInfo">
+            <TextView
+                android:id="@+id/trip_1_title"
+                style="@style/TripTitle"
+                android:text="Family Trip to Italy" />
+
+            <TextView
+                android:id="@+id/trip_1_date"
+                style="@style/TripDate"
+                android:text="Mon 12 - Fri 16 Jul (5 days)" />
+
+            <TextView
+                android:id="@+id/trip_1_countdown"
+                style="@style/TripCountdown"
+                android:text="In 126 days" />
+        </LinearLayout>
+    </LinearLayout>
 
 
-    <!--    layout_constraintBottom_toBottomOf=parent-->
-    <!--    layout_constraintEnd_toEndOf=parent-->
-    <!--    layout_constraintHorizontal_bias=0.45-->
-    <!--    layout_constraintStart_toStartOf=parent-->
-    <!--    layout_constraintTop_toBottomOf=@+id/seekBar-->
-    <CheckBox
-        android:id="@+id/checkBox"
-        style="@style/MyCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="CheckBox"
-        app:layout_constraintBottom_toBottomOf ="parent"
-        app:layout_constraintEnd_toEndOf ="parent"
-        app:layout_constraintHorizontal_bias ="0.5"
-        app:layout_constraintVertical_bias="0.1"
-        app:layout_constraintStart_toStartOf ="parent"
-        app:layout_constraintTop_toBottomOf ="@id/seekBar" />
+    <!-- Trip #2 -->
+    <LinearLayout android:id="@+id/trip_2"
+        style="@style/TripBanner">
+        <!-- Image of trip e.g. Eiffel tower -->
+        <ImageView android:id="@+id/trip_2_image"
+            style="@style/TripPhoto"
+            android:src="@drawable/paris" />
 
+        <!-- Trip info -->
+        <LinearLayout android:id="@+id/trip_2_info"
+            style="@style/TripInfo">
+            <TextView
+                android:id="@+id/trip_2_title"
+                style="@style/TripTitle"
+                android:text="Solo Paris Trip" />
 
-    <!--    layout_constraintBottom_toBottomOf=parent-->
-    <!--    layout_constraintEnd_toEndOf=parent-->
-    <!--    layout_constraintStart_toStartOf=parent-->
-    <!--    layout_constraintTop_toBottomOf=@+id/textView-->
-    <!--    layout_constraintVertical_bias=0.15-->
-    <!--    textColor=-->
+            <TextView
+                android:id="@+id/trip_2_date"
+                style="@style/TripDate"
+                android:text="Fri 08 - Wed 16 Aug (9 days)" />
+
+            <TextView
+                android:id="@+id/trip_2_countdown"
+                style="@style/TripCountdown"
+                android:text="In 180 days" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Trip #3 -->
+    <LinearLayout android:id="@+id/trip_3"
+        style="@style/TripBanner">
+        <!-- Image of trip e.g. Eiffel tower -->
+        <ImageView android:id="@+id/trip_3_image"
+            style="@style/TripPhoto"
+            android:src="@drawable/tokyo" />
+
+        <LinearLayout android:id="@+id/trip_3_info"
+            style="@style/TripInfo">
+            <TextView
+                android:id="@+id/trip_3_title"
+                style="@style/TripTitle"
+                android:text="Tokyo Business Trip" />
+
+            <TextView
+                android:id="@+id/trip_3_date"
+                style="@style/TripDate"
+                android:text="Sat 01 - Sun 17 Feb (17 days)" />
+
+            <TextView
+                android:id="@+id/trip_3_countdown"
+                style="@style/TripCountdown"
+                android:text="In 250 days" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Trip #4 -->
+    <LinearLayout android:id="@+id/trip_4"
+        style="@style/TripBanner">
+        <!-- Image of trip e.g. Eiffel tower -->
+        <ImageView android:id="@+id/trip_4_image"
+            style="@style/TripPhoto"
+            android:src="@drawable/pyongyang" />
+
+        <LinearLayout android:id="@+id/trip_4_info"
+            style="@style/TripInfo">
+            <TextView
+                android:id="@+id/trip_4_title"
+                style="@style/TripTitle"
+                android:text="Pyongyang Vacation" />
+
+            <TextView
+                android:id="@+id/trip_4_date"
+                style="@style/TripDate"
+                android:text="Tue 10 - Sun 15 Feb (6 days)" />
+
+            <TextView
+                android:id="@+id/trip_4_countdown"
+                style="@style/TripCountdown"
+                android:text="In 300 days" />
+            </LinearLayout>
+    </LinearLayout>
+
+    <!-- Button to add a new trip -->
     <Button
-        android:id="@+id/myLongButton"
-        style="@style/MyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="10dp"
-        android:text="Long Click Me"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintVertical_bias="0.15" />
+        android:id="@+id/new_trip_btn"
+        style="@style/NewTripBtn"
+        android:text="Add Trip" />
 
 
-    <!--    layout_constraintStart_toStartOf=parent-->
-    <!--    layout_constraintTop_toBottomOf=@+id/myLongButton-->
-    <Button
-        android:id="@+id/button"
-        style="@style/MyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
-        android:layout_marginTop="76dp"
-        android:text="Button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myLongButton" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

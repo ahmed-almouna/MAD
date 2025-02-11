@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!--    colorPrimary @color/colorPrimary-->
-    <!--    colorPrimaryDark @color/colorPrimaryDark-->
-    <!--    colorAccent @color/colorAccent-->
+    <!-- default app theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!--    android:textSize-->
-    <style name="MyCheckBox" parent="@style/MyTextView">
-        <item name="android:textSize">15sp</item>
+    <!-- Banner to contain the summary of a trip -->
+    <style name="TripBanner">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/light_grey</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginBottom">30dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:elevation">6dp</item>
     </style>
 
-    <!--    android:textSize-->
-    <!--    android:textStyle-->
-    <style name="MyTextView">
+    <style name="TripPhoto">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+    </style>
+
+
+    <!-- The textual details of the trip -->
+    <style name="TripInfo">
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- The title of the trip -->
+    <style name="TripTitle" parent="TripInfo">
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
     </style>
 
-    <!--    android:background-->
-    <style name="MyButton" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:background">#ABC123</item>
+    <!-- The date of the trip -->
+    <style name="TripDate" parent="TripInfo">
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginBottom">6dp</item>
+    </style>
+
+    <!-- The countdown of the trip -->
+    <style name="TripCountdown" parent="TripDate">
+    </style>
+
+    <!-- Add new trip button -->
+    <style name="NewTripBtn" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@color/teal_700</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">120dp</item>
+        <item name="android:layout_marginTop">40dp</item>
+        <item name="android:height">60dp</item>
+        <item name="android:width">180dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

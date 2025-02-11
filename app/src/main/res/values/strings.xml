@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">A1</string>
-    <string name="activity2">Activity 2</string>
-    <string name="activity3">Activity 3</string>
-
+    <string name="app_name">Trip Planner</string>
+    <string name="activity_1">Activity 1</string>
+    <string name="activity_2">Activity 2</string>
+    <string name="activity_3">Activity 3</string>
 
 </resources>
