@@ -25,11 +25,11 @@
         </activity>
 
         <activity
-            android:name=".SecondActivity"
+            android:name=".DestinationActivity"
             android:label="@string/activity_2" />
 
         <activity
-            android:name=".ThirdActivity"
+            android:name=".BookingActivity"
             android:label="@string/activity_3" />
     </application>
 
