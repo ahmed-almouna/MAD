@@ -117,9 +117,8 @@
     </LinearLayout>
 
     <!-- Button to add a new trip -->
-    <Button
-        android:id="@+id/new_trip_btn"
-        style="@style/NewTripBtn"
+    <Button android:id="@+id/add_trip_btn"
+        style="@style/AddTripBtn"
         android:text="Add Trip" />
 
 
