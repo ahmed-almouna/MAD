@@ -24,7 +24,7 @@ public class MainActivity extends ComponentActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
-        
+
         addTripBtn = findViewById(R.id.add_trip_btn);
         tripOneBanner = findViewById(R.id.trip_1);
         tripTwoBanner = findViewById(R.id.trip_2);
@@ -47,7 +47,7 @@ public class MainActivity extends ComponentActivity
 
     private void openTicketActivity()
     {
-        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        Intent intent = new Intent(MainActivity.this, BookingActivity.class);
         startActivity(intent);
     }
 }

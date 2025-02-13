@@ -4,4 +4,39 @@
     <string name="activity_2">Activity 2</string>
     <string name="activity_3">Activity 3</string>
 
+    <!-- Main Screen -->
+    <string name="add_trip">Add Trip</string>
+    <string name="no_trips">No trips planned yet</string>
+
+    <!-- Destination Screen -->
+    <string name="enter_destination">Enter destination</string>
+    <string name="select_country">Select country</string>
+    <string name="travel_type">Travel Type</string>
+    <string name="type_leisure">Leisure</string>
+    <string name="type_business">Business</string>
+    <string name="next">Next</string>
+
+    <!-- Booking Screen -->
+    <string name="select_date">Select Travel Dates</string>
+    <string name="budget">Budget: $%1$d</string>
+    <string name="min_budget">$100</string>
+    <string name="max_budget">$1000</string>
+    <string name="select_accommodation">Select Accommodation</string>
+    <string name="book_trip">Book Trip</string>
+
+    <!-- Country Spinner Options -->
+    <string-array name="countries">
+        <item>Select a country</item>
+        <item>United States</item>
+        <item>Italy</item>
+        <item>France</item>
+        <item>Japan</item>
+        <item>Spain</item>
+        <item>Thailand</item>
+        <item>Australia</item>
+        <item>Brazil</item>
+        <item>Canada</item>
+        <item>Germany</item>
+    </string-array>
+
 </resources>
