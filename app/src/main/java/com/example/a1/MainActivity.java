@@ -31,7 +31,6 @@ public class MainActivity extends ComponentActivity
         tripThreeBanner = findViewById(R.id.trip_3);
         tripFourBanner = findViewById(R.id.trip_4);
 
-
         initializeListeners();
     }
 
@@ -47,7 +46,7 @@ public class MainActivity extends ComponentActivity
 
     private void openTicketActivity()
     {
-        Intent intent = new Intent(MainActivity.this, BookingActivity.class);
+        Intent intent = new Intent(MainActivity.this, DestinationActivity.class);
         startActivity(intent);
     }
 }
