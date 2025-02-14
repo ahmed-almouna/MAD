@@ -15,6 +15,8 @@ public class DestinationActivity extends ComponentActivity {
     private RadioGroup travelTypeGroup;
     private Button nextButton;
 
+    private Button backButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +27,7 @@ public class DestinationActivity extends ComponentActivity {
         countrySpinner = findViewById(R.id.country_spinner);
         travelTypeGroup = findViewById(R.id.travel_type_group);
         nextButton = findViewById(R.id.next_button);
+        backButton = findViewById(R.id.back_button);
 
         // Populate the Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -38,6 +41,11 @@ public class DestinationActivity extends ComponentActivity {
         nextButton.setOnClickListener(v -> {
             Intent intent = new Intent(DestinationActivity.this, BookingActivity.class);
             intent.putExtra("destination", destinationInput.getText().toString());
+            startActivity(intent);
+        });
+
+        backButton.setOnClickListener(View -> {
+            Intent intent = new Intent(DestinationActivity.this, MainActivity.class);
             startActivity(intent);
         });
     }

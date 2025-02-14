@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 public class MainActivity extends ComponentActivity
 {
     public static final String TAG = MainActivity.class.getSimpleName();
-
     private Button addTripBtn;
     private LinearLayout tripOneBanner;
     private LinearLayout tripTwoBanner;

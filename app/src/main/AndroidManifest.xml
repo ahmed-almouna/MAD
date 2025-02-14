@@ -26,11 +26,13 @@
 
         <activity
             android:name=".DestinationActivity"
-            android:label="@string/activity_2" />
+            android:label="@string/activity_2"
+            android:theme="@style/AppTheme" />
 
         <activity
             android:name=".BookingActivity"
-            android:label="@string/activity_3" />
+            android:label="@string/activity_3"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

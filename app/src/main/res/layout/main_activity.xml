@@ -4,10 +4,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="25dp"
+        android:text="Your Upcoming Trips:" />
+
     <!-- Trip #1 -->
     <LinearLayout android:id="@+id/trip_1"
         style="@style/TripBanner"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="20dp">
         <!-- Image of trip e.g. Eiffel tower -->
         <ImageView android:id="@+id/trip_1_image"
             style="@style/TripPhoto"
@@ -32,7 +41,6 @@
                 android:text="In 126 days" />
         </LinearLayout>
     </LinearLayout>
-
 
     <!-- Trip #2 -->
     <LinearLayout android:id="@+id/trip_2"
@@ -120,6 +128,5 @@
     <Button android:id="@+id/add_trip_btn"
         style="@style/AddTripBtn"
         android:text="Add Trip" />
-
 
 </LinearLayout>
