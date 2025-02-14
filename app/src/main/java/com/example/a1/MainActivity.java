@@ -17,7 +17,6 @@ public class MainActivity extends ComponentActivity
     private LinearLayout tripThreeBanner;
     private LinearLayout tripFourBanner;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -33,7 +32,7 @@ public class MainActivity extends ComponentActivity
         initializeListeners();
     }
 
-    // This function initializes all the event listeners needed in this activity
+    // This function initializes all the event listeners needed for this activity
     private void initializeListeners()
     {
         addTripBtn.setOnClickListener(v -> openTicketActivity());
@@ -43,6 +42,7 @@ public class MainActivity extends ComponentActivity
         tripFourBanner.setOnClickListener(v -> openTicketActivity());
     }
 
+    // This function opens the ticket/destination activity
     private void openTicketActivity()
     {
         Intent intent = new Intent(MainActivity.this, DestinationActivity.class);
