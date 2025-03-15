@@ -39,6 +39,53 @@
             android:text="Business" />
     </RadioGroup>
 
+    <TextView
+        android:id="@+id/date_picker_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/travel_type_group"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Departure Date:"
+        android:layout_marginTop="20dp"/>
+
+    <DatePicker
+        android:id="@+id/departure_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        app:layout_constraintTop_toBottomOf="@id/date_picker_label"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/budget_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/departure_date_picker"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Budget: $0"
+        android:layout_marginTop="5dp"/>
+
+    <SeekBar
+        android:id="@+id/budget_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/budget_label"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:max="5000" />
+
+    <ImageView
+        android:id="@+id/hotel_preview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@id/budget_seekbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/hotel_placeholder" />
+
     <Button
         android:id="@+id/next_button"
         android:layout_width="wrap_content"
