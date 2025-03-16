@@ -5,6 +5,15 @@
     android:padding="16dp">
 
     <Button
+        android:id="@+id/openGoogleButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="More about my country" />
+
+    <Button
         android:id="@+id/finish_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

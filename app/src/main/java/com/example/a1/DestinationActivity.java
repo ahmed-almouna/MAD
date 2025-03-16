@@ -54,10 +54,13 @@ public class DestinationActivity extends ComponentActivity {
         countrySpinner.setAdapter(adapter);
 
         nextButton.setOnClickListener(v -> {
+            String selectedCountry = countrySpinner.getSelectedItem().toString();  // Get selected country data
             Intent intent = new Intent(DestinationActivity.this, BookingActivity.class);
             intent.putExtra("destination", destinationInput.getText().toString());
+            intent.putExtra("country", selectedCountry);  // Pass country to BookingActivity
             startActivity(intent);
         });
+
 
         backButton.setOnClickListener(View -> {
             Intent intent = new Intent(DestinationActivity.this, MainActivity.class);
