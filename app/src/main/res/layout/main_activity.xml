@@ -1,132 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <!-- Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="20dp"
-        android:textSize="25dp"
-        android:text="Your Upcoming Trips:" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <!-- Trip #1 -->
-    <LinearLayout android:id="@+id/trip_1"
-        style="@style/TripBanner"
-        android:layout_marginTop="20dp">
-        <!-- Image of trip e.g. Eiffel tower -->
-        <ImageView android:id="@+id/trip_1_image"
-            style="@style/TripPhoto"
-            android:src="@drawable/italy" />
+        <!-- Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="25dp"
+            android:text="Your Upcoming Trips:" />
 
-        <!-- Trip info -->
-        <LinearLayout android:id="@+id/trip_1_info"
-            style="@style/TripInfo">
-            <TextView
-                android:id="@+id/trip_1_title"
-                style="@style/TripTitle"
-                android:text="Family Trip to Italy" />
+        <!-- Container for trips -->
+        <LinearLayout
+            android:id="@+id/trip_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TripBanner"
+            android:orientation="vertical"/>
 
-            <TextView
-                android:id="@+id/trip_1_date"
-                style="@style/TripDate"
-                android:text="Mon 12 - Fri 16 Jul (5 days)" />
+        <!-- Button to add a new trip -->
+        <Button android:id="@+id/add_trip_btn"
+            style="@style/AddTripBtn"
+            android:text="Add Trip" />
 
-            <TextView
-                android:id="@+id/trip_1_countdown"
-                style="@style/TripCountdown"
-                android:text="In 126 days" />
-        </LinearLayout>
     </LinearLayout>
-
-    <!-- Trip #2 -->
-    <LinearLayout android:id="@+id/trip_2"
-        style="@style/TripBanner">
-        <!-- Image of trip e.g. Eiffel tower -->
-        <ImageView android:id="@+id/trip_2_image"
-            style="@style/TripPhoto"
-            android:src="@drawable/paris" />
-
-        <!-- Trip info -->
-        <LinearLayout android:id="@+id/trip_2_info"
-            style="@style/TripInfo">
-            <TextView
-                android:id="@+id/trip_2_title"
-                style="@style/TripTitle"
-                android:text="Solo Paris Trip" />
-
-            <TextView
-                android:id="@+id/trip_2_date"
-                style="@style/TripDate"
-                android:text="Fri 08 - Wed 16 Aug (9 days)" />
-
-            <TextView
-                android:id="@+id/trip_2_countdown"
-                style="@style/TripCountdown"
-                android:text="In 180 days" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Trip #3 -->
-    <LinearLayout android:id="@+id/trip_3"
-        style="@style/TripBanner">
-        <!-- Image of trip e.g. Eiffel tower -->
-        <ImageView android:id="@+id/trip_3_image"
-            style="@style/TripPhoto"
-            android:src="@drawable/tokyo" />
-
-        <LinearLayout android:id="@+id/trip_3_info"
-            style="@style/TripInfo">
-            <TextView
-                android:id="@+id/trip_3_title"
-                style="@style/TripTitle"
-                android:text="Tokyo Business Trip" />
-
-            <TextView
-                android:id="@+id/trip_3_date"
-                style="@style/TripDate"
-                android:text="Sat 01 - Sun 17 Feb (17 days)" />
-
-            <TextView
-                android:id="@+id/trip_3_countdown"
-                style="@style/TripCountdown"
-                android:text="In 250 days" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <!-- Trip #4 -->
-    <LinearLayout android:id="@+id/trip_4"
-        style="@style/TripBanner">
-        <!-- Image of trip e.g. Eiffel tower -->
-        <ImageView android:id="@+id/trip_4_image"
-            style="@style/TripPhoto"
-            android:src="@drawable/pyongyang" />
-
-        <LinearLayout android:id="@+id/trip_4_info"
-            style="@style/TripInfo">
-            <TextView
-                android:id="@+id/trip_4_title"
-                style="@style/TripTitle"
-                android:text="Pyongyang Vacation" />
-
-            <TextView
-                android:id="@+id/trip_4_date"
-                style="@style/TripDate"
-                android:text="Tue 10 - Sun 15 Feb (6 days)" />
-
-            <TextView
-                android:id="@+id/trip_4_countdown"
-                style="@style/TripCountdown"
-                android:text="In 300 days" />
-            </LinearLayout>
-    </LinearLayout>
-
-    <!-- Button to add a new trip -->
-    <Button android:id="@+id/add_trip_btn"
-        style="@style/AddTripBtn"
-        android:text="Add Trip" />
-
-</LinearLayout>
+</ScrollView>

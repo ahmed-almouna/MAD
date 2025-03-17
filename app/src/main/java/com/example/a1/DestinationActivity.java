@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.NumberPicker;
 
 import androidx.activity.ComponentActivity;
 
@@ -26,12 +27,11 @@ public class DestinationActivity extends ComponentActivity {
     private RadioGroup travelTypeGroup;
     private Button nextButton;
     private Button backButton;
-
     private DatePicker departurePicker;
     private SeekBar budgetSeekBar;
-    private ImageView hotelPreview;
     private TextView budgetText;
-    private Button finishButton;
+    private TextView durationText;
+    private NumberPicker numberOfDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +44,16 @@ public class DestinationActivity extends ComponentActivity {
         travelTypeGroup = findViewById(R.id.travel_type_group);
         nextButton = findViewById(R.id.next_button);
         backButton = findViewById(R.id.back_button);
-
         departurePicker = findViewById(R.id.departure_date_picker);
         budgetSeekBar = findViewById(R.id.budget_seekbar);
-        hotelPreview = findViewById(R.id.hotel_preview);
         budgetText = findViewById(R.id.budget_label);
+        durationText = findViewById(R.id.duration_label);
+        numberOfDays = findViewById(R.id.stay_days_picker);
+
+        // set min and max values for days picker
+        numberOfDays.setValue(1);
+        numberOfDays.setMinValue(1);
+        numberOfDays.setMaxValue(30);
 
         // Populate the Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -62,7 +67,7 @@ public class DestinationActivity extends ComponentActivity {
         nextButton.setOnClickListener(v -> {
 
             try {
-                saveTripToFile(); //Save trip to file
+                saveTripToFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -79,7 +84,6 @@ public class DestinationActivity extends ComponentActivity {
             Intent intent = new Intent(DestinationActivity.this, MainActivity.class);
             startActivity(intent);
         });
-
 
         // Get destination from intent
         String destination = getIntent().getStringExtra("destination");
@@ -103,10 +107,20 @@ public class DestinationActivity extends ComponentActivity {
             }
         });
 
+        // Update duration of trip when number is changed
+        numberOfDays.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+                durationText.setText("Duration: " + newVal + " day(s)");
+            }
+        });
+
 
     }
 
-    private void saveTripToFile() throws IOException {
+    // This function saves trips to files
+    private void saveTripToFile() throws IOException
+    {
         /* Extract the trip details entered by the user */
         String tripName = destinationInput.getText().toString();
         String country =  countrySpinner.getSelectedItem().toString();
@@ -123,17 +137,19 @@ public class DestinationActivity extends ComponentActivity {
         int departureDay = departurePicker.getDayOfMonth();
         int departureMonth = departurePicker.getMonth();
         int departureYear = departurePicker.getYear();
-        String departureDate = departureDay + "/" + departureMonth + "/" + departureYear;
+        String departureDate = String.format("%02d-%02d-%d", departureDay, departureMonth, departureYear);
         int budget = budgetSeekBar.getProgress();
+        int tripDuration = numberOfDays.getValue();
 
         String tripData = "Name: " + tripName +
                 "\nDestination: " + country +
                 "\nType: " + tripType +
-                "\nDeparture date: " + departureDate +
-                "\nbudget: " + budget;
+                "\nDeparture: " + departureDate +
+                "\nBudget: " + budget +
+                "\nDuration: " + tripDuration;
 
         /* Write details to file */
-        FileOutputStream out = openFileOutput(tripName, MODE_PRIVATE);
+        FileOutputStream out = openFileOutput("trip-" + tripName, MODE_PRIVATE);
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
         writer.write(tripData);
         writer.close();

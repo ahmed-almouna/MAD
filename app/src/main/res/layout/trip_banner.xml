@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- Trip image -->
+    <ImageView
+        android:id="@+id/trip_image"
+        style="@style/TripPhoto"
+        android:src="@drawable/default_trip" />
+
+    <!-- Trip Info -->
+    <LinearLayout
+        android:id="@+id/trip_info"
+        style="@style/TripInfo">
+
+        <TextView
+            android:id="@+id/trip_title"
+            style="@style/TripTitle"
+            android:text="Trip Title" />
+
+        <TextView
+            android:id="@+id/trip_date"
+            style="@style/TripDate"
+            android:text="Trip Date" />
+
+        <TextView
+            android:id="@+id/trip_countdown"
+            style="@style/TripCountdown"
+            android:text="Countdown" />
+    </LinearLayout>
+</LinearLayout>

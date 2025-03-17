@@ -76,15 +76,22 @@
         android:layout_marginTop="16dp"
         android:max="5000" />
 
-    <ImageView
-        android:id="@+id/hotel_preview"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+    <TextView
+        android:id="@+id/duration_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/budget_seekbar"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/hotel_placeholder" />
+        android:text="Duration: 1 day(s)"
+        android:layout_marginTop="10dp"/>
+
+    <NumberPicker
+        android:id="@+id/stay_days_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/budget_seekbar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/next_button"
