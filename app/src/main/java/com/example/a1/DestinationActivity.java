@@ -11,6 +11,8 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.activity.ComponentActivity;
 
@@ -50,6 +52,9 @@ public class DestinationActivity extends ComponentActivity {
         hotelPreview = findViewById(R.id.hotel_preview);
         budgetText = findViewById(R.id.budget_label);
 
+        // Start async tasks
+        executeChainedAsyncTasks();
+
         // Populate the Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
@@ -81,6 +86,9 @@ public class DestinationActivity extends ComponentActivity {
         });
 
 
+
+
+
         // Get destination from intent
         String destination = getIntent().getStringExtra("destination");
         String country = getIntent().getStringExtra("country");
@@ -104,6 +112,57 @@ public class DestinationActivity extends ComponentActivity {
         });
 
 
+    }
+
+    private void executeChainedAsyncTasks() {
+        new DownloadFileTask().execute();
+    }
+
+    // This task runs in the background to pretend to download file.
+    // We do it async as the part of requirements and
+    // also added a little delay to make it feel more real,
+    //generally it does almost nothing useful, but just here to demonstrate
+    // the use of async stuff
+    private class DownloadFileTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            try {
+                Thread.sleep(2000); // Simulate file download delay
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "trip_details.txt"; // Simulated file name
+        }
+
+        @Override
+        protected void onPostExecute(String fileName) {
+            new ReadFileTask().execute(fileName);
+        }
+    }
+
+    // This task runs in the background to read a file.
+    // We do it async as the part of requirements and
+    // also added a little delay to make it feel more real,
+    //generally it does almost nothing useful, but just here to demonstrate
+    // the use of async stuff
+    private class ReadFileTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String fileName = params[0];
+
+            try {
+                Thread.sleep(1000); // Simulate file read delay
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return "File " + fileName + " read successfully!";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            Log.d("AsyncTasks", result);
+        }
     }
 
     private void saveTripToFile() throws IOException {
