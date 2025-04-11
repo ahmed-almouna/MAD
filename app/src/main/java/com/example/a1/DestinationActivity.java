@@ -21,6 +21,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.os.Build;
+import android.content.IntentFilter;
 
 public class DestinationActivity extends ComponentActivity {
     private EditText destinationInput;
@@ -33,11 +39,25 @@ public class DestinationActivity extends ComponentActivity {
     private TextView budgetText;
     private TextView durationText;
     private NumberPicker numberOfDays;
+    private BatteryLowReceiver batteryLowReceiver; // Declare the receiver
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_destination);
+
+        // Register the BatteryLowReceiver
+        batteryLowReceiver = new BatteryLowReceiver();
+        IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
+        registerReceiver(batteryLowReceiver, filter);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
 
         // Initialize views
         destinationInput = findViewById(R.id.destination_input);
@@ -69,7 +89,6 @@ public class DestinationActivity extends ComponentActivity {
         countrySpinner.setAdapter(adapter);
 
         nextButton.setOnClickListener(v -> {
-
             try {
                 saveTripToFile();
             } catch (IOException e) {
@@ -82,7 +101,6 @@ public class DestinationActivity extends ComponentActivity {
             intent.putExtra("country", selectedCountry);  // Pass country to BookingActivity
             startActivity(intent);
         });
-
 
         backButton.setOnClickListener(View -> {
             Intent intent = new Intent(DestinationActivity.this, MainActivity.class);
@@ -118,19 +136,12 @@ public class DestinationActivity extends ComponentActivity {
                 durationText.setText("Duration: " + newVal + " day(s)");
             }
         });
-
-
     }
 
     private void executeChainedAsyncTasks() {
         new DownloadFileTask().execute();
     }
 
-    // This task runs in the background to pretend to download file.
-    // We do it async as the part of requirements and
-    // also added a little delay to make it feel more real,
-    //generally it does almost nothing useful, but just here to demonstrate
-    // the use of async stuff
     private class DownloadFileTask extends AsyncTask<Void, Void, String> {
         @Override
         protected String doInBackground(Void... voids) {
@@ -148,11 +159,6 @@ public class DestinationActivity extends ComponentActivity {
         }
     }
 
-    // This task runs in the background to read a file.
-    // We do it async as the part of requirements and
-    // also added a little delay to make it feel more real,
-    //generally it does almost nothing useful, but just here to demonstrate
-    // the use of async stuff
     private class ReadFileTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
@@ -172,43 +178,23 @@ public class DestinationActivity extends ComponentActivity {
             Log.d("AsyncTasks", result);
         }
     }
-    
-    // This function saves trips to files
-    private void saveTripToFile() throws IOException
-    {
-        /* Extract the trip details entered by the user */
-        String tripName = destinationInput.getText().toString();
-        String country =  countrySpinner.getSelectedItem().toString();
-        int selectedTripType = travelTypeGroup.getCheckedRadioButtonId();
-        String tripType;
-        if (selectedTripType == R.id.type_business)
-        {
-            tripType = "Business";
-        }
-        else
-        {
-            tripType = "Leisure";
-        }
-        int departureDay = departurePicker.getDayOfMonth();
-        int departureMonth = departurePicker.getMonth();
-        int departureYear = departurePicker.getYear();
-        String departureDate = String.format("%02d-%02d-%d", departureDay, departureMonth, departureYear);
-        int budget = budgetSeekBar.getProgress();
-        int tripDuration = numberOfDays.getValue();
 
-        String tripData = "Name: " + tripName +
-                "\nDestination: " + country +
-                "\nType: " + tripType +
-                "\nDeparture: " + departureDate +
-                "\nBudget: " + budget +
-                "\nDuration: " + tripDuration;
+    private void saveTripToFile() throws IOException {
+        String tripName = destinationInput.getText().toString(); // Get the destination name
+        Intent serviceIntent = new Intent(DestinationActivity.this, TripService.class);
+        serviceIntent.putExtra("tripName", tripName);
+        startService(serviceIntent); // Start the IntentService
 
-        /* Write details to file */
-        FileOutputStream out = openFileOutput("trip-" + tripName, MODE_PRIVATE);
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
-        writer.write(tripData);
-        writer.close();
-        out.close();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        // Unregister the receiver to avoid memory leaks
+        if (batteryLowReceiver != null) {
+            unregisterReceiver(batteryLowReceiver);
+        }
+    }
 }
+
