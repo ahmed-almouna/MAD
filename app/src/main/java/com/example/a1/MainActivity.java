@@ -1,10 +1,14 @@
 package com.example.a1;
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ImageView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import androidx.activity.ComponentActivity;
 import androidx.annotation.Nullable;
@@ -18,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends ComponentActivity
 {
@@ -54,6 +59,8 @@ public class MainActivity extends ComponentActivity
         List<Trip> trips = readTripsFromFiles();
         LinearLayout tripContainer = findViewById(R.id.trip_container);
         tripContainer.removeAllViews();
+        long upcomingTripCountdown = 1000;
+        String upcomingTripTitle = "";
 
         for (Trip trip : trips)
         {
@@ -75,6 +82,12 @@ public class MainActivity extends ComponentActivity
             long daysUntilTrip = ChronoUnit.DAYS.between(today, departure);
             tripCountdown.setText("In " + daysUntilTrip + " days");
 
+            if (daysUntilTrip <= upcomingTripCountdown)
+            {
+                upcomingTripTitle = trip.name;
+                upcomingTripCountdown = daysUntilTrip;
+            }
+
             // Set trip image based on destination (replace with your actual logic)
             if (trip.destination.equalsIgnoreCase("Italy"))
             {
@@ -95,6 +108,7 @@ public class MainActivity extends ComponentActivity
 
             tripContainer.addView(tripBanner);
         }
+        TripWidgetProvider.updateWidget(this, upcomingTripTitle, upcomingTripCountdown);
     }
 
     // THis function read trips details from files

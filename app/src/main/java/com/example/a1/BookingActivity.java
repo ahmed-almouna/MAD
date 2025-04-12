@@ -35,11 +35,18 @@ public class BookingActivity extends ComponentActivity {
             });
 
         openGoogleButton.setOnClickListener(v -> {
+            /* Show confirmation box */
             if (country != null && !country.isEmpty()) {
-                // Create a Wikipedia URL for the country
-                String url = "https://en.wikipedia.org/wiki/" + country.replace(" ", "_");
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));  // Creates an intent to open the URL
-                startActivity(intent);  // just opesn the browser
+                new android.app.AlertDialog.Builder(BookingActivity.this)
+                    .setTitle("Go to wikipedia")
+                    .setMessage("Are you sure you want to leave the app to Wikipedia?")
+                    .setPositiveButton("Yes", (dialog, which) -> {
+                        String url = "https://en.wikipedia.org/wiki/" + country.replace(" ", "_");
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                    })
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                    .show();
             } else {
                 Toast.makeText(BookingActivity.this, "Country not selected", Toast.LENGTH_SHORT).show();
             }
