@@ -23,6 +23,16 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.provider.ContactsContract;
+import android.util.Log;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.widget.Toast;
+
+
 
 public class MainActivity extends ComponentActivity
 {
@@ -38,7 +48,39 @@ public class MainActivity extends ComponentActivity
         addTripBtn = findViewById(R.id.add_trip_btn);
         displayTrips();
         initializeListeners();
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_CONTACTS}, 1);
+        } else {
+            readFirstContact();
+        }
+
     }
+
+    private void readFirstContact() {
+        Cursor contacts = getContentResolver().query(
+                ContactsContract.Contacts.CONTENT_URI,
+                null, null, null, null);
+
+        if (contacts != null && contacts.moveToFirst()) {
+            int nameIndex = contacts.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
+            if (nameIndex != -1) {
+                String contactName = contacts.getString(nameIndex);
+                Log.d("SystemProvider", "First contact name: " + contactName);
+
+                // Optional: show as a toast for visual feedback
+                Toast.makeText(this, "First contact: " + contactName, Toast.LENGTH_LONG).show();
+            } else {
+                Log.d("SystemProvider", "DISPLAY_NAME column not found.");
+            }
+            contacts.close();
+        } else {
+            Log.d("SystemProvider", "No contacts found.");
+        }
+    }
+
 
     // This function initializes all the event listeners needed for this activity
     private void initializeListeners()
