@@ -1,3 +1,4 @@
+
 package com.example.a1;
 
 import android.content.BroadcastReceiver;
@@ -26,6 +27,9 @@ public class BatteryLowReceiver extends BroadcastReceiver {
         }
     }
 }
+
+
+
 
 
 

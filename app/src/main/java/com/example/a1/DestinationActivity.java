@@ -12,6 +12,12 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.NumberPicker;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import android.os.Build;
+import android.content.IntentFilter;
 
 import androidx.activity.ComponentActivity;
 import android.os.AsyncTask;
@@ -179,13 +185,44 @@ public class DestinationActivity extends ComponentActivity {
         }
     }
 
-    private void saveTripToFile() throws IOException {
-        String tripName = destinationInput.getText().toString(); // Get the destination name
-        Intent serviceIntent = new Intent(DestinationActivity.this, TripService.class);
-        serviceIntent.putExtra("tripName", tripName);
-        startService(serviceIntent); // Start the IntentService
+    // This function saves trips to files
+    private void saveTripToFile() throws IOException
+    {
+        /* Extract the trip details entered by the user */
+        String tripName = destinationInput.getText().toString();
+        String country =  countrySpinner.getSelectedItem().toString();
+        int selectedTripType = travelTypeGroup.getCheckedRadioButtonId();
+        String tripType;
+        if (selectedTripType == R.id.type_business)
+        {
+            tripType = "Business";
+        }
+        else
+        {
+            tripType = "Leisure";
+        }
+        int departureDay = departurePicker.getDayOfMonth();
+        int departureMonth = departurePicker.getMonth();
+        int departureYear = departurePicker.getYear();
+        String departureDate = String.format("%02d-%02d-%d", departureDay, departureMonth, departureYear);
+        int budget = budgetSeekBar.getProgress();
+        int tripDuration = numberOfDays.getValue();
 
+        String tripData = "Name: " + tripName +
+                "\nDestination: " + country +
+                "\nType: " + tripType +
+                "\nDeparture: " + departureDate +
+                "\nBudget: " + budget +
+                "\nDuration: " + tripDuration;
+
+        /* Write details to file */
+        FileOutputStream out = openFileOutput("trip-" + tripName, MODE_PRIVATE);
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+        writer.write(tripData);
+        writer.close();
+        out.close();
     }
+
 
     @Override
     protected void onDestroy() {
